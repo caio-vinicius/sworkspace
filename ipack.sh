@@ -4,7 +4,7 @@ ipack()
 {
     package=$1
     echo " - Instalando suporte para $package..."
-    dpkg --list | grep snapd > .check
+    dpkg --list | grep $package > .check
     file="./.check"
     if [ -s "$file" ]
     then
@@ -25,3 +25,5 @@ ipack()
         sudo apt-get -y install $package >> log.sfr
     fi
 }
+
+ipack $1
