@@ -9,7 +9,7 @@ ipack()
     if [ -s "$file" ]
     then
         echo " - Você já tem suporte para $package."
-        apt-cache policy snapd | grep -nF " *** " > .check
+        apt-cache policy $package | grep -nF " *** " > .check
         if [ `head -c 1 .check` -ne 5 ]
         then
             read -p " * Versão ultrapassa para $package, deseja atualizar? (y/n): " res
