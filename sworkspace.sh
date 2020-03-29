@@ -40,6 +40,8 @@
 # 27/03/2020
 # v0.02 - Implementação dos argumentos -c,-d, -e, -i, -p e retirada do
 #			argumento -a.
+# 27/03/2020
+# v0.03 - Implementação do argumento -m e adicionados mais softwares.
 #------------------------------------------------------------------------------
 
 #Comando de inicialização
@@ -52,7 +54,7 @@ echo " - Atualizando repositórios apt"
 sudo apt-get -y update  > update.sfr
 sudo apt-get -y upgrade > upgrade.sfr
 echo " - Instalando suporte a snap"
-sudo apt-get -y install snap > snap.sfr
+sudo apt-get -y install snapd > snap.sfr
 
 echo ""
 echo "-----------------------------------------------"
@@ -63,8 +65,8 @@ case "$1" in
 
 	-b | --base)
 		echo " * Ferramentas de manutenção de databases"
-		echo "   - Instalando MySql Workbench"
-		sudo apt-get install -y mysql-workbench > workbench.sfr
+#		echo "   - Instalando MySql Workbench"
+#		sudo apt-get install -y mysql-workbench > workbench.sfr
 		echo "   - Instalando DBeaver Community"
 		sudo snap install dbeaver-ce > dbeaver.sfr
 	;;
@@ -83,6 +85,8 @@ case "$1" in
 		sudo apt-get install -y make >> c.sfr
 		echo "     -> Editor de texto vim"
 		sudo apt-get install -y vim >> c.sfr
+		echo "     -> Emulador de terminal Tilix"
+		sudo apt-get install -y tilix >> c.sfr
 		echo "-----------------------------------------------"
 		echo "   - Instalando pacotes de desenvolvimento em C#"
 		echo "     -> Baixando pacote .deb"
@@ -100,10 +104,21 @@ case "$1" in
 		echo "     -> Ferramenta de edição Visual Studio Code"
 		sudo snap install code --classic > dotnet.sfr
 		echo "-----------------------------------------------"
-		echo "   - Instalando pacotes de desenvolvimento Java"
+		echo "   - Pacotes de desenvolvimento Java"
 		echo "     -> Instalando Java JDK"
 		sudo apt-get install -y default-jdk > java.sfr
-	;;
+		echo "     -> IDE de desenvolvimento Eclipse"
+		sudo snap install eclipse --edge --classic
+		echo "   - Pacotes de desenvolvimento Gnome"
+		echo "     -> IDE de desenvolvimento Gnome"
+		sudo apt-get install -y gnome-builder > gnome.sfr
+		echo "-----------------------------------------------"
+		echo "   - Ferramentas para controle e versionamento de código"
+		echo "     -> Controle e versionamento git"
+		apt-get install -y git > git.sfr
+		echo "     -> Ferramenta visual Gitkraken"
+		sudo snap install gitkraken > gitkraken.sfr
+		;;
 
 	-d | --data)
 		echo " * Servidores de banco de dados"
@@ -126,11 +141,17 @@ case "$1" in
 	-i | --internet)
 		echo " * Ferramentas para produtividade na internet"
 		echo "-----------------------------------------------"
-		echo "   - Instalação de navegação e email"
+		echo "   - Instalação de navegação, email e comunicação"
 		echo "     -> Instalando Firefox"
 		sudo apt-get install -y firefox > firefox.sfr
 		echo "     -> Gerenciador de email Thunderbird"
 		sudo apt-get install -y thunderbird > thunderbird.sfr
+		echo "     -> Mensageiro Slack"
+		sudo snap install slack --classic > slack.sfr
+		echo "     -> Mensageiro Telegram"
+		sudo snap install telegram-desktop > telegram.sfr
+		echo "     -> Whatsapp desktop"
+		sudo snap install whatsdesk > whats.sfr
 	;;
 
 	-p | --producao)
@@ -146,6 +167,15 @@ case "$1" in
 		echo "     -> Ferramenta office Onlyoffice"
 		sudo snap install onlyoffice-desktopeditors
 	;;
+
+	-m | --media)
+		echo "* Ferramentas para entreterimento"
+		echo "-----------------------------------------------"
+		echo "   - Instalação de ferramenta de multmedia"
+		echo "     -> Reprodutor de vídeo VLC"
+		apt-get install -y vlc > vlc.sfr
+		echo "     -> Reprodutor de audio Spotify"
+		sudo snap install spotify > spotify.sfr
 
 esac
 
